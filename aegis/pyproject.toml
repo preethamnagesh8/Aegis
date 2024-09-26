@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aegis"
+version = "0.1.0"
+description = "Aegis using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = { extras = ["tools"], version = ">=0.63.2,<1.0.0" }
+
+
+[tool.poetry.scripts]
+aegis = "aegis.main:run"
+run_crew = "aegis.main:run"
+train = "aegis.main:train"
+replay = "aegis.main:replay"
+test = "aegis.main:test"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
