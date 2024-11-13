@@ -4,19 +4,17 @@ research_task:
     Gather insights that reflect current trends, developments, and noteworthy facts. 
     Avoid outdated data, and cross-reference sources for accuracy.
   expected_output: >
-    A list of 20 bullet points containing the most relevant, current, and credible information on {topic}, 
+    A list of 25 bullet points containing the most relevant, current, and credible information on {topic}, 
     organized by importance and categorized by themes if applicable.
   agent: researcher
 
 
 content_planning_task:
   description: >
-    Create an expanded outline for a comprehensive blog on {topic}, using the research findings. 
-    Break down the article into detailed sections (e.g., Introduction, History, Key Concepts, 
-    Technical Aspects, Practical Applications, Use Cases, Industry Challenges, and Conclusion). 
-    Include potential areas for detailed code snippets, visual aids, and infographics where applicable. 
-    Suggest real-world analogies and connections to relatable scenarios to enhance understanding and engagement. 
-    Aim for an outline that supports a lengthy, in-depth article.
+    Create an outline for a comprehensive blog on {topic}, using the research findings. 
+    Break down the article into detailed sections as you best understand. Include potential areas 
+    for detailed code snippets where applicable. Suggest real-world analogies and connections to 
+    relatable scenarios to enhance understanding and engagement. Aim for an outline that supports a lengthy, in-depth article.
   expected_output: >
     A comprehensive outline with at least 6-8 major sections, each with sub-sections as needed. 
     Include proposed areas for code snippets, visuals, and real-world analogies to support each section theme.
@@ -25,41 +23,42 @@ content_planning_task:
 
 content_expansion_task:
   description: >
-    Analyze the outline provided by the Content Planner and break down each section into subsections where appropriate, 
-    adding depth and factual information. Utilize the research data from the Senior Data Researcher, diving deeper 
-    into each point and adding relevant statistics, examples, and references. Ensure that each section has a MINIMUM OF 300 WORDS, 
-    and elaborate on key concepts with details that keep readers informed and engaged. Cross-reference with additional sources 
-    as needed to verify facts, using citations or linking credible sources if required by the article format. Review each 
-    expanded section for cohesion and alignment with the overall blog structure, ensuring that it flows 
-    logically into the following sections.
+    Use the data obtained from Senior Data Researcher and group them into sections which are created by the 
+    content planner. Then, rewrite and expand each section with a MINIMUM OF 300 WORDS, and elaborate on key concepts 
+    with details that keep readers informed and engaged. Review each expanded section for cohesion and alignment with 
+    the overall blog structure, ensuring that it flows logically. Also ensure to explain terms and jargons in new paragraphs 
+    as necessary. Look for opportunities to add relatable examples, case studies, or analogies to make the information more approachable.
   expected_output: >
     A comprehensive, factually correct expansion of each blog section, ready for the Storyline Generator to add narrative elements.
   agent: content_expander
 
 
-storyline_development_task:
+code_enhancer_task:
   description: >
-    A storyline-enhanced outline with clear transitions between each section, 
-    suggested case studies or historical examples where relevant, and introductory/concluding sentences 
-    for each section to maintain a cohesive narrative. Look for opportunities to add relatable examples, 
-    case studies, or analogies to make the information more approachable. Weave in storytelling elements 
-    such as curiosity-driven hooks, relatable scenarios, and contextual background to keep readers engaged.
-    Ensure that all sections flow together as a cohesive whole, reinforcing key points through engaging storytelling.
-    Maintain a conversational tone that is accessible and appealing, making complex ideas easy to understand 
-    without losing factual integrity.
+    Review the content provided by the Content Expander to identify sections where code examples 
+    can clarify or support key concepts. Insert appropriate code snippets based on the context, ensuring each example is 
+    relevant and easy to understand. Add comments within the code to explain each step, making it accessible even to less 
+    experienced readers. If relevant provide code examples in Java and Python.
   expected_output: >
-    A narrative-enhanced blog article, with smooth transitions, engaging hooks, relatable examples, 
-    and a consistent, friendly tone that guides readers from start to finish.
-  agent: storyline_generator
+    A blog article enhanced with clear, well-commented code snippets where necessary, ready for the Blog Formatter to finalize with HTML structure and styling.
+  agent: code_enhancer
+
+
+content_flow_review_task:
+  description: >
+    Review the content provided by the Code Enhancer for abrupt transitions or gaps. 
+    Add or refine transitional phrases to connect sections smoothly. Ensure a consistent tone and 
+    style, making minor adjustments for a uniform voice. ENSURE TO KEEP CHANGES SUBTLE.
+  expected_output: >
+    A cohesive, smoothly flowing blog article with well-connected sections, ready for final formatting.
+  agent: code_enhancer
 
 
 html_formatting_task:
   description: >
-    Format the storyline-enhanced blog content in HTML, applying <h3> tags for section headings, 
-    and use bullet points, bold, and italicized text where appropriate for readability. 
-    Ensure the content is SEO-friendly by adding keywords, meta descriptions, and alt text for images. 
-    The formatted document should be visually appealing and accessible, ready for online publication.
-    ENSURE TO REMOVE THE INITIAL PART OF HTML AND ONLY INCLUDE THE BODY PART IN THE CONTENT OF BLOG.
+    Format the content flow reviewed blog in HTML, applying <h3> tags for section headings, 
+    and use bullet points (HTML Lists), bold (bold tags), and italicized text where appropriate for readability. 
+    ENSURE TO REMOVE THE INITIAL PART OF HTML INCLUDING THE TITLE AND ONLY INCLUDE THE BODY PART IN THE CONTENT OF BLOG.
     ALSO ENSURE TO REMOVE NUMBERING TO SECTIONS, LET THEM BE ONLY TEXT.
   expected_output: >
     The blog article formatted in HTML, with headings, styling, and SEO elements integrated. 

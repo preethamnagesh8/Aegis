@@ -12,7 +12,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'SQL Injection'
+        'topic': 'Cross Site Scripting'
     }
     AegisCrew().crew().kickoff(inputs=inputs)
 

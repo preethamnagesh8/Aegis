@@ -33,11 +33,20 @@ class AegisCrew():
 			tools = [WordPressCreateBlog()],
 			verbose=True
 		)
-
+	
 	@agent
-	def storyline_generator(self) -> Agent:
+	def code_enhancer(self) -> Agent:
 		return Agent(
-			config=self.agents_config['storyline_generator'],
+			config=self.agents_config['code_enhancer'],
+			tools = [WordPressCreateBlog()],
+			verbose=True
+		)
+	
+	@agent
+	def content_flow_reviewer(self) -> Agent:
+		return Agent(
+			config=self.agents_config['content_flow_reviewer'],
+			tools = [WordPressCreateBlog()],
 			verbose=True
 		)
 	
@@ -75,12 +84,20 @@ class AegisCrew():
 		return Task(
 			config=self.tasks_config['content_expansion_task'],
 		)
+	
+	@task
+	def code_enhancer_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['code_enhancer_task'],
+		)
+	
 
 	@task
-	def storyline_development_task(self) -> Task:
+	def content_flow_review_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['storyline_development_task'],
+			config=self.tasks_config['content_flow_review_task'],
 		)
+	
 	
 	@task
 	def html_formatting_task(self) -> Task:
@@ -93,6 +110,15 @@ class AegisCrew():
 		return Task(
 			config=self.tasks_config['blog_publishing_task'],
 		)
+	
+	#Manager Agent Definition --------------
+
+	manager = Agent(
+		role = "{topic} Blog Project Manager",
+		goal = "Efficiently manage the crew and ensure generation of high-quality blog articles",
+		backstory = "You're an experienced project manager, skilled in overseeing complex projects and guiding teams to success. Your role is to coordinate the efforts of the crew members, ensuring that each task is completed as instructed and to the highest standard. Ensure to double check completion of each task and retry them 1 TIME AT MAXIMUM",
+		allow_delegation = True,
+	)
 
 	@crew
 	def crew(self) -> Crew:
@@ -100,7 +126,8 @@ class AegisCrew():
 		return Crew(
 			agents=self.agents, # Automatically created by the @agent decorator
 			tasks=self.tasks, # Automatically created by the @task decorator
-			process=Process.sequential,
+			manager_agent = self.manager,
+			process=Process.hierarchical,
 			verbose=True,
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)
