@@ -129,5 +129,6 @@ class AegisCrew():
 			manager_agent = self.manager,
 			process=Process.hierarchical,
 			verbose=True,
+			memory=True
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)

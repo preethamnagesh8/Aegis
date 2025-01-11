@@ -12,7 +12,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'Cross Site Scripting'
+        'topic': 'Broken Object Level Authorization'
     }
     AegisCrew().crew().kickoff(inputs=inputs)
 
